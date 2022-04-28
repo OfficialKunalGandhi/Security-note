@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:security_notes/utils/assets.dart';
 import 'package:security_notes/utils/colors.dart';
+import 'package:security_notes/utils/route.dart';
 import 'package:security_notes/utils/strings.dart';
 import 'package:security_notes/widgets/custom_button.dart';
 import 'package:sizer/sizer.dart';
@@ -14,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     return Material(
         color: AppColors.whiteColor,
         child: ListView(
+          shrinkWrap: true,
           children: [
             Image.asset(
               Assets.securityAnimation,
@@ -32,13 +36,29 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   CustomButton(
-                      title: Strings.rootCheck, imagePath: Assets.rootCheck),
+                    title: Strings.rootCheck,
+                    imagePath: Assets.rootCheck,
+                    routeName: Routes.homeScreen,
+                  ),
+                  if (Platform.isAndroid)
+                    CustomButton(
+                      title: Strings.developerModeCheck,
+                      imagePath: Assets.rootCheck,
+                      routeName: Routes.developerModeCheck,
+                    ),
                   CustomButton(
-                      title: Strings.rootCheck, imagePath: Assets.rootCheck),
+                    title: Strings.addPersonalNote,
+                    imagePath: Assets.rootCheck,
+                    hint: Strings.localStorage,
+                    routeName: Routes.saveNote,
+                    arguments: const {"typeNote": Strings.localStorage},
+                  ),
                   CustomButton(
-                      title: Strings.rootCheck, imagePath: Assets.rootCheck),
-                  CustomButton(
-                      title: Strings.rootCheck, imagePath: Assets.rootCheck),
+                    title: Strings.addPersonalNote,
+                    imagePath: Assets.rootCheck,
+                    hint: Strings.globelStorage,
+                    routeName: Routes.homeScreen,
+                  ),
                 ],
               ),
             )
